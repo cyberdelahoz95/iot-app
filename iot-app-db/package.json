@@ -3,7 +3,7 @@
   "version": "1.0.0.",
   "description": "Module to Connect IoT App with PostgreSQL db",
   "main": "index.js",
-  "repository": "https://github.com/cyberdelahoz95/iot-app-db",
+  "repository": "https://github.com/cyberdelahoz95/iot-app",
   "author": "Henry de la Hoz <cyberdelahoz95@gmail.com>",
   "license": "MIT",
   "private": false,
