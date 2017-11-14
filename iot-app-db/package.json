@@ -3,6 +3,9 @@
   "version": "1.0.0.",
   "description": "Module to Connect IoT App with PostgreSQL db",
   "main": "index.js",
+  "scripts": {
+    "lint": "standard --fix"
+  },
   "repository": "https://github.com/cyberdelahoz95/iot-app",
   "author": "Henry de la Hoz <cyberdelahoz95@gmail.com>",
   "license": "MIT",
@@ -11,5 +14,8 @@
     "pg": "^7.4.0",
     "pg-hstore": "^2.3.2",
     "sequelize": "^4.22.6"
+  },
+  "devDependencies": {
+    "standard": "^10.0.3"
   }
 }
