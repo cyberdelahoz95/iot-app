@@ -4,7 +4,8 @@
   "description": "Module to Connect IoT App with PostgreSQL db",
   "main": "index.js",
   "scripts": {
-    "lint": "standard --fix"
+    "lint": "standard --fix",
+    "setup": "DEBUG=iot-app:* node setup.js"
   },
   "repository": "https://github.com/cyberdelahoz95/iot-app",
   "author": "Henry de la Hoz <cyberdelahoz95@gmail.com>",
