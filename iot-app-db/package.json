@@ -5,13 +5,15 @@
   "main": "index.js",
   "scripts": {
     "lint": "standard --fix",
-    "setup": "DEBUG=iot-app:* node setup.js"
+    "setup": "DEBUG=iot-app:* node setup.js",
+    "test": "DEBUG=iot-app:* nyc --reporter=lcov ava tests/ --verbose"
   },
   "repository": "https://github.com/cyberdelahoz95/iot-app",
   "author": "Henry de la Hoz <cyberdelahoz95@gmail.com>",
   "license": "MIT",
   "private": false,
   "dependencies": {
+    "debug": "^3.1.0",
     "pg": "^7.4.0",
     "pg-hstore": "^2.3.2",
     "sequelize": "^4.22.6"

@@ -1,0 +1,16 @@
+[PENDIENTE]
+instalar inquirer chalk defaults
+instalar en dev ava sqlite3 nyc sinon proxyquire
+
+[NOTAS]
+para correr postgresql la primera vez desde la terminal se debe ingregar desde el usuario postgresql
+sudo su postgresql
+
+se debe activar la solicitud de password desde postgresql ya que por defecto el password no se solicita
+
+para lo cual en linux nos dirigimos a cd /etc/postgresql/9.5/main
+
+abrimos el archivo pg_hba.conf y luego editamos los metodos de autenticacion, agregamos
+
+password o md5 como los metodos de autenticacion, si esta trust borramos y agregamos uno de los dos metodos anteriores
+
