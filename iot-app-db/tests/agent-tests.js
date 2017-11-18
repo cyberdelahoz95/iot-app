@@ -20,9 +20,13 @@ let id = 1
 
 test.beforeEach(async () => {
   sandbox = sinon.sandbox.create() // un sandbox nos permite guardar registros de invocaciones echas a sinon en un ambiente local, es decir especificamente para la prueba que se este ejecutando, esto tomando en cuenta que se ejecutaran multiples test de manera paralela y todos ellos llamaran al beforeeach
+
   AgentStub = {
-    hasMany: sandbox.spy()
+    hasMany: sandbox.spy(),
+    findById: sandbox.stub()
   }
+
+  AgentStub.findById.withArgs(id).returns(Promise.resolve(agentFixtures.byId(id)))
 
   const setupDatabase = proxyquire('../', {
     './models/agent': () => AgentStub,
