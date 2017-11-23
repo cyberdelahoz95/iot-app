@@ -1,0 +1,33 @@
+# iot-app-mqtt
+
+## `agent/connected`
+```JS
+{
+    agent: {
+        uuid, // auto generate
+        username, // define by config
+        name,  // define by config
+        hostname,  // get from OS
+        pid  // get from process
+    }
+}
+```
+## `agent/disconnected`
+```JS
+{
+    agent: {
+        uuid, // auto generate
+    }
+}
+```
+## `agent/message`
+```JS
+{
+    agent,
+    metrics: [{
+        type,
+        value
+    }],
+    timestamp
+}
+```

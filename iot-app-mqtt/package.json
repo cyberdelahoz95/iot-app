@@ -1,0 +1,26 @@
+{
+  "name": "iot-app-mqtt",
+  "version": "1.0.0",
+  "private": true,
+  "description": "A Simple IoT Platform - MQTT Server",
+  "main": "server.js",
+  "scripts": {
+    "start": "NODE_ENV=production node server.js",
+    "start-dev": "DEBUG=iot-app:* nodemon server.js",
+    "lint": "standard"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cyberdelahoz95/iot-app.git"
+  },
+  "author": "Henry de la Hoz <cyberdelahoz95@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/cyberdelahoz95/iot-app/issues"
+  },
+  "homepage": "https://github.com/cyberdelahoz95/iot-app/#readme",
+  "devDependencies": {
+    "nodemon": "^1.12.1",
+    "standard": "^10.0.3"
+  }
+}

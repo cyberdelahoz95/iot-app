@@ -9,6 +9,9 @@ const chalk = require('chalk')
 const prompt = inquirer.createPromptModule()
 
 async function setup () {
+
+if (process.argv[2] !== '-y'){
+
   const answer = await prompt([{
     type: 'confirm',
     name: 'setup',
@@ -18,6 +21,8 @@ async function setup () {
   if (!answer.setup) {
     return console.log('Nothing happened')
   }
+
+}
 
   const config = {
     database: process.env.DB_NAME || 'iot_app_db',
