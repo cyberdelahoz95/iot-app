@@ -1,6 +1,3 @@
-[PENDIENTE]
-instalar inquirer chalk defaults
-instalar en dev ava sqlite3 nyc sinon proxyquire
 
 [NOTAS]
 para correr postgresql la primera vez desde la terminal se debe ingregar desde el usuario postgresql

@@ -21,9 +21,9 @@ let uuid = 'yyy-yyy-yyy'
 
 /* Args for Tests */
 let testsArgs = {
-  uuid : { where : {  uuid  } },
-  connected: { where : {  connected: true  } },
-  username: { where : {  username: 'henry', connected: true  } },
+  uuid: { where: { uuid } },
+  connected: { where: { connected: true } },
+  username: { where: { username: 'henry', connected: true } }
 }
 
 let newAgent = {
@@ -50,7 +50,7 @@ test.beforeEach(async () => {
   AgentStub.findById.withArgs(id).returns(Promise.resolve(agentFixtures.byId(id)))
   AgentStub.findOne.withArgs(testsArgs.uuid).returns(Promise.resolve(agentFixtures.byUuid(uuid)))
   AgentStub.create.withArgs(newAgent).returns(Promise.resolve({
-    toJSON () { return newAgent}
+    toJSON () { return newAgent }
   }))
   AgentStub.update.withArgs(single, testsArgs.uuid).returns(Promise.resolve(single))
   AgentStub.findAll.withArgs(testsArgs.connected).returns(Promise.resolve(agentFixtures.connected))
@@ -110,7 +110,6 @@ test.serial('Agent#createOrUpdate  - new', async t => {
   t.true(AgentStub.create.called, 'create should be called on model')
   t.true(AgentStub.create.calledOnce, 'create should be called once')
   t.true(AgentStub.create.calledWith(newAgent), 'create should be called with newAgent args')
-
 
   t.deepEqual(agent, newAgent, 'created agent Should be the same')
 })
