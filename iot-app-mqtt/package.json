@@ -6,8 +6,8 @@
   "main": "server.js",
   "scripts": {
     "start": "NODE_ENV=production node server.js",
-    "start-dev": "DEBUG=iot-app:* nodemon server.js",
-    "lint": "standard"
+    "start-dev": "yarn run lint && DEBUG=iot-app:* nodemon server.js",
+    "lint": "standard --fix"
   },
   "repository": {
     "type": "git",
@@ -27,6 +27,7 @@
     "chalk": "^2.3.0",
     "debug": "^3.1.0",
     "mosca": "^2.7.0",
-    "redis": "^2.8.0"
+    "redis": "^2.8.0",
+    "iot-app-db": "file:../iot-app-db"
   }
 }

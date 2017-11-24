@@ -33,5 +33,5 @@
 ```
 ```
 for sending message to test the mqtt server you can use the command
-mqtt pub -t ‘agent/message’ -h localhost -m ‘{“hello”;“platziverse”}’
+npx mqtt pub -t ‘agent/message’ -h localhost -m ‘{“hello”;“platziverse”}’
 ```
