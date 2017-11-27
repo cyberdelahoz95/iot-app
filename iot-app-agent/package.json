@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "IoT App , Agent Module",
   "main": "index.js",
+  "private":true,
   "repository": "https://github.com/cyberdelahoz95/iot-app.git",
   "author": "Henry de la Hoz <cyberdelahoz95@gmail.com>",
   "license": "MIT",
