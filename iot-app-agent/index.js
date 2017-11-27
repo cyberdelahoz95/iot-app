@@ -67,11 +67,11 @@ class IotAppAgent extends EventEmitter {
                         metrics: [],
                         timestamp: new Date().getTime()
                     }
-                }
+                
 
                 for(let [ metric, fn] of this._metrics){
                     if(fn.length == 1){
-                        fn = util.promisify(fn)
+                        fn = util.promisify(fn) // node 8
                     }
 
                     message.metrics.push({
@@ -84,7 +84,9 @@ class IotAppAgent extends EventEmitter {
 
                 this._client.publish('agent/message', JSON.stringify(message))
                 this.emit('agent/message', message)
-             },opts.interval)
+
+             }
+            },opts.interval)
 
         })
 
