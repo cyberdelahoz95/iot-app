@@ -7,7 +7,7 @@ const api = express.Router()
 
 api.get('/agents', (req, res) => {
   debug('A new request to /agents')
-  res.send({reply: 'got it'})
+  res.send({})
 })
 
 api.get('/agent/:uuid', (req, res) => {
@@ -17,6 +17,7 @@ api.get('/agent/:uuid', (req, res) => {
 
 api.get('/metrics/:uuid', (req, res) => {
   const {uuid} = req.params
+  
   res.send({uuid})
 })
 

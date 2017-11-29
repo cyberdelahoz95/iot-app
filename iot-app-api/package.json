@@ -6,15 +6,18 @@
   "scripts": {
     "start": "NODE_ENV=production node server.js",
     "start-dev": "yarn run lint && DEBUG=iot-app:* nodemon server.js",
-    "lint": "standard --fix"
+    "lint": "standard --fix",
+    "test": "DEBUG=iot-app:* ava tests/ --verbose"
   },
   "repository": "https://github.com/cyberdelahoz95/iot-app.git",
   "author": "Henry de la Hoz <cyberdelahoz95@gmail.com>",
   "license": "MIT",
   "private": true,
   "devDependencies": {
+    "ava": "^0.24.0",
     "nodemon": "^1.12.1",
-    "standard": "^10.0.3"
+    "standard": "^10.0.3",
+    "supertest": "^3.0.0"
   },
   "dependencies": {
     "chalk": "^2.3.0",

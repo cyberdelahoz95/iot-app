@@ -133,4 +133,4 @@ function handleError (err) {
 }
 
 process.on('uncaughtException', handleFatalError)
-process.on('uncaughtRejection', handleFatalError)
+process.on('unhandledRejection', handleFatalError)
