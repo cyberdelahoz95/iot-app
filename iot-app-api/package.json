@@ -22,6 +22,8 @@
   "dependencies": {
     "chalk": "^2.3.0",
     "debug": "^3.1.0",
-    "express": "^4.16.2"
+    "express": "^4.16.2",
+    "express-asyncify": "^1.0.0",
+    "iot-app-db": "file:../iot-app-db"
   }
 }
