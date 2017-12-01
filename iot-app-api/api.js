@@ -3,6 +3,7 @@
 const debug = require('debug')('iot-app:api')
 const express = require('express')
 const asyncify = require('express-asyncify')
+const auth = require('express-jwt')
 const db = require('iot-app-db')
 const errors = require('./errors')
 const config = require('./config')
@@ -25,34 +26,42 @@ api.use('*', async (req, res, next) => {
   next()
 })
 
-api.get('/agents', async (req, res, next) => {
+api.get('/agents', auth(config.auth), async (req, res, next) => {
   debug('A new request to /agents')
+
+  const {user} = req
+
+  if (!user || !user.username) {
+    return next(errors.NotAuthorizedError())
+  }
+
   let agents = []
   try {
-    agents = await Agent.findConnected()
+    if (user.admin) agents = await Agent.findConnected()
+    else agents = await Agent.findByUsername(user.username)
   } catch (e) {
     return next(e)
   }
   res.send(agents)
 })
 
-api.get('/agent/:uuid', async (req, res,next) => {  
+api.get('/agent/:uuid', auth(config.auth), async (req, res, next) => {
   const {uuid} = req.params
   debug(`A new request to /agent/${uuid}`)
-  
+
   let agent
   try {
     agent = await Agent.findByUuid(uuid)
   } catch (e) {
     return next(e)
-  }  
-  if(!agent) {
+  }
+  if (!agent) {
     return next(new errors.AgentNotFoundError(uuid))
   }
   res.send(agent)
 })
 
-api.get('/metrics/:uuid', async (req, res, next) => {
+api.get('/metrics/:uuid', auth(config.auth), async (req, res, next) => {
   const {uuid} = req.params
   debug(`A new request to /metrics/${uuid}`)
 
@@ -62,13 +71,13 @@ api.get('/metrics/:uuid', async (req, res, next) => {
   } catch (error) {
     return next(error)
   }
-  if(!metrics || metrics.length === 0){
+  if (!metrics || metrics.length === 0) {
     return next(new errors.MetricsNotFoundError(uuid))
   }
-  res.send({uuid})
+  res.send(metrics)
 })
 
-api.get('/metrics/:uuid/:type', async (req, res, next) => {
+api.get('/metrics/:uuid/:type', auth(config.auth), async (req, res, next) => {
   const {uuid, type} = req.params
   debug(`A new request to /metrics/${uuid}/${type}`)
   let metrics = []
@@ -77,9 +86,9 @@ api.get('/metrics/:uuid/:type', async (req, res, next) => {
   } catch (error) {
     return next(error)
   }
-  if(!metrics || metrics.length === 0){
+  if (!metrics || metrics.length === 0) {
     return next(new errors.MetricsNotFoundError(uuid, type))
-  }  
+  }
   res.send(metrics)
 })
 

@@ -7,7 +7,7 @@
     "start": "NODE_ENV=production node server.js",
     "start-dev": "yarn run lint && DEBUG=iot-app:* nodemon server.js",
     "lint": "standard --fix",
-    "test": "DEBUG=iot-app:* ava tests/ --verbose"
+    "test": "yarn run lint && DEBUG=iot-app:* ava tests/ --verbose"
   },
   "repository": "https://github.com/cyberdelahoz95/iot-app.git",
   "author": "Henry de la Hoz <cyberdelahoz95@gmail.com>",
@@ -16,6 +16,8 @@
   "devDependencies": {
     "ava": "^0.24.0",
     "nodemon": "^1.12.1",
+    "proxyquire": "^1.8.0",
+    "sinon": "^4.1.2",
     "standard": "^10.0.3",
     "supertest": "^3.0.0"
   },
@@ -24,6 +26,8 @@
     "debug": "^3.1.0",
     "express": "^4.16.2",
     "express-asyncify": "^1.0.0",
-    "iot-app-db": "file:../iot-app-db"
+    "express-jwt": "^5.3.0",
+    "iot-app-db": "file:../iot-app-db",
+    "jsonwebtoken": "^8.1.0"
   }
 }

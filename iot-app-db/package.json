@@ -6,7 +6,7 @@
   "scripts": {
     "lint": "standard --fix",
     "setup": "DEBUG=iot-app:* node setup.js",
-    "test": "DEBUG=iot-app:* nyc --reporter=lcov ava tests/ --verbose"
+    "test": "yarn run lint && DEBUG=iot-app:* nyc --reporter=lcov ava tests/ --verbose"
   },
   "repository": "https://github.com/cyberdelahoz95/iot-app",
   "author": "Henry de la Hoz <cyberdelahoz95@gmail.com>",
