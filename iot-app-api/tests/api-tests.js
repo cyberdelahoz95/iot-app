@@ -24,7 +24,7 @@ const type = 'RFID'
 
 test.beforeEach(async () => {
   sandbox = sinon.sandbox.create()
-  token = await sign({admin: true, username: 'iot-app'}, config.auth.secret)
+  token = await sign({admin: true, username: 'iot-app', permissions: ['metrics:read']}, config.auth.secret)
   dbStub = sandbox.stub()
   dbStub.returns(Promise.resolve({
     Agent: AgentStub,

@@ -1544,6 +1544,13 @@ express-asyncify@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/express-asyncify/-/express-asyncify-1.0.0.tgz#6194dddd2a30ed1c28649140485384525e8e1c77"
 
+express-jwt-permissions@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/express-jwt-permissions/-/express-jwt-permissions-1.0.0.tgz#ed6171d06f662dfa58f3a7707b7d2c8e37583a7d"
+  dependencies:
+    lodash.get "^4.4.2"
+    xtend "^4.0.1"
+
 express-jwt@^5.3.0:
   version "5.3.0"
   resolved "https://registry.yarnpkg.com/express-jwt/-/express-jwt-5.3.0.tgz#3d90cd65802e6336252f19e6a3df3e149e0c5ea0"

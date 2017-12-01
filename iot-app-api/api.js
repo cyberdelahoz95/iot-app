@@ -4,6 +4,7 @@ const debug = require('debug')('iot-app:api')
 const express = require('express')
 const asyncify = require('express-asyncify')
 const auth = require('express-jwt')
+const guard = require('express-jwt-permissions')() // se invoca como una funcion q devuelve una instancia de express-jwt-permissions
 const db = require('iot-app-db')
 const errors = require('./errors')
 const config = require('./config')
@@ -61,7 +62,7 @@ api.get('/agent/:uuid', auth(config.auth), async (req, res, next) => {
   res.send(agent)
 })
 
-api.get('/metrics/:uuid', auth(config.auth), async (req, res, next) => {
+api.get('/metrics/:uuid', auth(config.auth), guard.check(['metrics:read']), async (req, res, next) => {
   const {uuid} = req.params
   debug(`A new request to /metrics/${uuid}`)
 
