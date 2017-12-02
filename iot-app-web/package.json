@@ -1,0 +1,28 @@
+{
+  "name": "iot-app-web",
+  "version": "1.0.0",
+  "description": "A single IoT App, Web Dashboard",
+  "main": "server.js",
+  "scripts": {
+    "start": "NODE_ENV=production node server.js",
+    "start-dev": "yarn run lint && DEBUG=iot-app:* nodemon server.js",
+    "lint": "standard --fix"
+  },
+  "author": "Henry de la Hoz <cyberdelahoz95@gmail.com>",
+  "license": "MIT",
+  "private": true,
+  "repository": "https://github.com/cyberdelahoz95/iot-app.git",
+  "dependencies": {
+    "chalk": "^2.3.0",
+    "debug": "^3.1.0",
+    "express": "^4.16.2",
+    "iot-app-agent": "file:../iot-app-agent",
+    "request": "^2.83.0",
+    "request-promise-native": "^1.0.5",
+    "socket.io": "^2.0.4"
+  },
+  "devDependencies": {
+    "nodemon": "^1.12.1",
+    "standard": "^10.0.3"
+  }
+}

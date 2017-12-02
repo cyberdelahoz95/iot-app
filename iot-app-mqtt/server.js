@@ -103,7 +103,7 @@ server.on('published', async (packet, client) => {
         for (let metric of payload.metrics) {
           let m
           try {
-            metric = await Metric.create(agent.uuid, metric)
+            m = await Metric.create(agent.uuid, metric)
           } catch (error) {
             return handleError(error)
           }
