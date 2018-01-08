@@ -5,8 +5,23 @@
   "main": "server.js",
   "scripts": {
     "start": "NODE_ENV=production node server.js",
+    "prestart": "yarn run build",
     "start-dev": "yarn run lint && DEBUG=iot-app:* nodemon server.js",
+    "prestart-dev": "yarn run build",
+    "build": "browserify -t babelify -t vueify client/app.js -o public/bundle.js",
     "lint": "standard --fix"
+  },
+  "browserify": {
+    "transform": [
+      [
+        "babelify",
+        {
+          "presets": [
+            "es2015"
+          ]
+        }
+      ]
+    ]
   },
   "author": "Henry de la Hoz <cyberdelahoz95@gmail.com>",
   "license": "MIT",
@@ -14,15 +29,28 @@
   "repository": "https://github.com/cyberdelahoz95/iot-app.git",
   "dependencies": {
     "chalk": "^2.3.0",
+    "chart.js": "^2.7.1",
     "debug": "^3.1.0",
     "express": "^4.16.2",
+    "express-asyncify": "^1.0.0",
     "iot-app-agent": "file:../iot-app-agent",
+    "moment": "^2.19.3",
+    "random-material-color": "^1.0.3",
     "request": "^2.83.0",
     "request-promise-native": "^1.0.5",
-    "socket.io": "^2.0.4"
+    "socket.io": "^2.0.4",
+    "socket.io-client": "^2.0.4",
+    "vue": "^2.5.9",
+    "vue-chartjs": "^3.0.2"
   },
   "devDependencies": {
+    "babel-core": "^6.26.0",
+    "babel-plugin-transform-runtime": "^6.23.0",
+    "babel-preset-es2015": "^6.24.1",
+    "babelify": "^8.0.0",
+    "browserify": "^14.5.0",
     "nodemon": "^1.12.1",
-    "standard": "^10.0.3"
+    "standard": "^10.0.3",
+    "vueify": "^9.4.1"
   }
 }

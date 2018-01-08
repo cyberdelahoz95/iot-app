@@ -36,4 +36,4 @@ agent.on('agent/connected', handler)
 agent.on('agent/disconnected', handler)
 agent.on('agent/message', handler)
 
-setTimeout(() => agent.disconnect(), 10000)
+//setTimeout(() => agent.disconnect(), 10000)

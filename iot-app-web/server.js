@@ -8,16 +8,14 @@ const chalk = require('chalk')
 const socketio = require('socket.io')
 const IotAppAgent = require('iot-app-agent')
 const {pipe} = require('./utils')
-const proxy = require('/proxy')
+const proxy = require('./proxy')
 const asyncify = require('express-asyncify')
-
 
 const port = process.env.PORT || 8080
 
-const server = http.createServer(app)
-
 const app = asyncify(express())
 
+const server = http.createServer(app)
 
 const io = socketio(server)
 
@@ -58,13 +56,13 @@ io.on('connect', socket => {
 })
 
 app.use((err, req, res, next) => {
-    debug(`Error in server.js: ${err.message}`)
-  
-    if (err.status) {
-      return res.status(err.status).send({error: err.message})
-    }
-    res.status(500).send({error: err.message})
-  })
+  debug(`Error in server.js: ${err.message}`)
+
+  if (err.status) {
+    return res.status(err.status).send({error: err.message})
+  }
+  res.status(500).send({error: err.message})
+})
 
 function handleFatalError (err) {
   handleError(err)
