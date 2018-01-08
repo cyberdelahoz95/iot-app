@@ -1,5 +1,7 @@
 'use strict'
 
+if (process.env.NODE_ENV !== 'production') require('longjohn')
+
 const http = require('http')
 const express = require('express')
 const asyncify = require('express-asyncify')

@@ -1,28 +1,30 @@
 'use strict'
+if (process.env.NODE_ENV !== 'production') require('longjohn')
+
 const debug = require('debug')('iot-app:db:setup')
 
 const db = require('./')
 
 const inquirer = require('inquirer')
+const minimist = require('minimist')
 const chalk = require('chalk')
 
+const args = minimist(process.argv)
 const prompt = inquirer.createPromptModule()
 
 async function setup () {
+// if (process.argv[2] !== '-y'){
+  if (!args.yes) {
+    const answer = await prompt([{
+      type: 'confirm',
+      name: 'setup',
+      message: 'This will destroy your database, are you sure?'
+    }])
 
-if (process.argv[2] !== '-y'){
-
-  const answer = await prompt([{
-    type: 'confirm',
-    name: 'setup',
-    message: 'This will destroy your database, are you sure?'
-  }])
-
-  if (!answer.setup) {
-    return console.log('Nothing happened')
+    if (!answer.setup) {
+      return console.log('Nothing happened')
+    }
   }
-
-}
 
   const config = {
     database: process.env.DB_NAME || 'iot_app_db',

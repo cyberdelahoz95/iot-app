@@ -19,16 +19,15 @@ let MetricStub = null
 let single = Object.assign({}, metricFixtures.single)
 
 let AgentStub = {
-    hasMany: sinon.spy(),
-    findOne: sinon.stub(),
+  hasMany: sinon.spy(),
+  findOne: sinon.stub()
 }
 
 AgentStub.findOne.withArgs(agentUuid).returns(Promise.resolve(agentFixtures.byUuid(agentUuid)))
 
 let config = {
-    logging: function () {} // deshabilita el logging a la db
+  logging: function () {} // deshabilita el logging a la db
 }
-
 
 /* Args for Tests */
 let testsArgs = {
@@ -36,16 +35,16 @@ let testsArgs = {
   bytypeAgentUuid: {
     attributes: ['id', 'type', 'value', 'createdAt'],
     where: {
-        type
+      type
     },
     limit: 20,
     order: [['createdAt', 'DESC']],
     include: [{
-        attributes: [],
-        model: AgentStub,
-        where: {
-          uuid: agentUuid
-        }
+      attributes: [],
+      model: AgentStub,
+      where: {
+        uuid: agentUuid
+      }
     }],
     raw: true
   },
@@ -69,51 +68,50 @@ let newMetric = {
 }
 
 test.beforeEach(async () => {
-    sandbox = sinon.sandbox.create() // un sandbox nos permite guardar registros de invocaciones echas a sinon en un ambiente local, es decir especificamente para la prueba que se este ejecutando, esto tomando en cuenta que se ejecutaran multiples test de manera paralela y todos ellos llamaran al beforeeach
+  sandbox = sinon.sandbox.create() // un sandbox nos permite guardar registros de invocaciones echas a sinon en un ambiente local, es decir especificamente para la prueba que se este ejecutando, esto tomando en cuenta que se ejecutaran multiples test de manera paralela y todos ellos llamaran al beforeeach
 
-    MetricStub = {
-      belongsTo: sandbox.spy(), // sinon.spy nos permite tener un registro de las veces que la funcion fue llamada de tal forma que se pueda comprobar que se invoco el metodo que implementa la funcion
-      findAll: sandbox.stub(),
-      create: sandbox.stub()
-    }
+  MetricStub = {
+    belongsTo: sandbox.spy(), // sinon.spy nos permite tener un registro de las veces que la funcion fue llamada de tal forma que se pueda comprobar que se invoco el metodo que implementa la funcion
+    findAll: sandbox.stub(),
+    create: sandbox.stub()
+  }
 
-    MetricStub.create.withArgs(newMetric).returns(Promise.resolve({
-      toJSON () { return newMetric }
-    }))
+  MetricStub.create.withArgs(newMetric).returns(Promise.resolve({
+    toJSON () { return newMetric }
+  }))
 
-    MetricStub.findAll.withArgs(testsArgs.bytypeAgentUuid).returns(Promise.resolve(metricFixtures.byTypeAgentUuid(agentUuid, type)))
-    MetricStub.findAll.withArgs(testsArgs.byAgentUuid).returns(Promise.resolve(metricFixtures.byAgentUuid(agentUuid)))
+  MetricStub.findAll.withArgs(testsArgs.bytypeAgentUuid).returns(Promise.resolve(metricFixtures.byTypeAgentUuid(agentUuid, type)))
+  MetricStub.findAll.withArgs(testsArgs.byAgentUuid).returns(Promise.resolve(metricFixtures.byAgentUuid(agentUuid)))
 
-
-    const setupDatabase = proxyquire('../', {
-      './models/agent': () => AgentStub,
-      './models/metric': () => MetricStub
-    })
-    db = await setupDatabase(config)
+  const setupDatabase = proxyquire('../', {
+    './models/agent': () => AgentStub,
+    './models/metric': () => MetricStub
   })
+  db = await setupDatabase(config)
+})
 
-  test.afterEach(() => {
-    sandbox && sinon.sandbox.restore()
-  })
+test.afterEach(() => {
+  sandbox && sinon.sandbox.restore()
+})
 
-  test('Metric', t => {
-    t.truthy(db.Metric, 'Metric service should exist')
-  })
+test('Metric', t => {
+  t.truthy(db.Metric, 'Metric service should exist')
+})
 
-  test.serial('Metric#findByAgentUuid', async t => {
-    let metrics = await db.Metric.findByAgentUuid(agentUuid)
+test.serial('Metric#findByAgentUuid', async t => {
+  let metrics = await db.Metric.findByAgentUuid(agentUuid)
 
-    t.true(MetricStub.findAll.called, 'findAll should be called on model')
-    t.true(MetricStub.findAll.calledOnce, 'findAll should be called once-')
-    t.true(MetricStub.findAll.calledWith(testsArgs.byAgentUuid), 'findAll should be called with proper args')
-    t.deepEqual(metrics, metricFixtures.byAgentUuid(agentUuid), 'Should be the same')
-  })
+  t.true(MetricStub.findAll.called, 'findAll should be called on model')
+  t.true(MetricStub.findAll.calledOnce, 'findAll should be called once-')
+  t.true(MetricStub.findAll.calledWith(testsArgs.byAgentUuid), 'findAll should be called with proper args')
+  t.deepEqual(metrics, metricFixtures.byAgentUuid(agentUuid), 'Should be the same')
+})
 
-  test.serial('Metric#findByTypeAgentUuid', async t => {
-    let metrics = await db.Metric.findByTypeAgentUuid(type, agentUuid)
+test.serial('Metric#findByTypeAgentUuid', async t => {
+  let metrics = await db.Metric.findByTypeAgentUuid(type, agentUuid)
 
-    t.true(MetricStub.findAll.called, 'findAll should be called on model')
-    t.true(MetricStub.findAll.calledOnce, 'findAll should be called once-')
-    t.true(MetricStub.findAll.calledWith(testsArgs.bytypeAgentUuid), 'findAll should be called with proper args')
-    t.deepEqual(metrics, metricFixtures.byTypeAgentUuid(agentUuid, type), 'Should be the same')
-  })
+  t.true(MetricStub.findAll.called, 'findAll should be called on model')
+  t.true(MetricStub.findAll.calledOnce, 'findAll should be called once-')
+  t.true(MetricStub.findAll.calledWith(testsArgs.bytypeAgentUuid), 'findAll should be called with proper args')
+  t.deepEqual(metrics, metricFixtures.byTypeAgentUuid(agentUuid, type), 'Should be the same')
+})

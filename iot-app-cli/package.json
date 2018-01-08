@@ -1,0 +1,24 @@
+{
+  "name": "iot-app-cli",
+  "version": "1.0.0",
+  "description": "CLI app for IoT",
+  "bin": "iot-app-cli.js",
+  "scripts": {
+    "lint": "standard --fix"
+  },
+  "author": "Henry de la Hoz",
+  "license": "MIT",
+  "private": true,
+  "devDependencies": {
+    "longjohn": "^0.2.12",
+    "standard": "^10.0.3"
+  },
+  "dependencies": {
+    "args": "^3.0.8",
+    "blessed": "^0.1.81",
+    "blessed-contrib": "^4.8.5",
+    "iot-app-agent": "file:../iot-app-agent",
+    "minimist": "^1.2.0",
+    "moment": "^2.20.1"
+  }
+}

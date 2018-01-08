@@ -1,5 +1,7 @@
 'use strict'
 
+if (process.env.NODE_ENV !== 'production') require('longjohn')
+
 const debug = require('debug')('iot-app:agent')
 const mqtt = require('mqtt')
 const defaults = require('defaults')
